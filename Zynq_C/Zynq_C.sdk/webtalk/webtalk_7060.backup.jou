@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2018.1 (64-bit)
+# SW Build 2188600 on Wed Apr  4 18:40:38 MDT 2018
+# 
+# Start of session at: Mon May  7 20:03:24 2018
+# Process ID: 7060
+# Current directory: C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/Zynq_C/Zynq_C.sdk/webtalk
+# Command line: wbtcv.exe -mode batch -source sdk_webtalk.tcl
+# Log file: C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/Zynq_C/Zynq_C.sdk/webtalk/webtalk.log
+# Journal file: C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/Zynq_C/Zynq_C.sdk/webtalk\webtalk.jou
+#-----------------------------------------------------------
+source sdk_webtalk.tcl
