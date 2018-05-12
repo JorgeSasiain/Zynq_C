@@ -69,12 +69,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //----------------------------------------------------
 // PROTOTYPE FUNCTIONS
 //----------------------------------------------------
-void read_superpose_play();
-void array_delay(u32* array, u32 in_left, u32 in_right);
 unsigned char gpio_init();
+void nco_init(void*);
+void read_superpose_play();
+void array_delay(u32*, u32, u32);
 unsigned char IicConfig(unsigned int DeviceIdPS);
 void AudioPllConfig();
-void AudioWriteToReg(unsigned char u8RegAddr, unsigned char u8Data);
+void AudioWriteToReg(unsigned char, unsigned char);
 void AudioConfigureJacks();
 void LineinLineoutConfig();
 
@@ -83,6 +84,7 @@ XIicPs Iic;
 XGpio Gpio0; //Gpio instance for led and switches
 XGpio Gpio1; //Gpio instance for buttons
 XNco Nco;
+unsigned char volume;
 
 int main(void)
 {
@@ -94,7 +96,6 @@ int main(void)
 
 	//Configure the Audio Codec's PLL
 	AudioPllConfig();
-
 
 	//Configure the Line in and Line out ports.
 	//Call LineInLineOutConfig() for a configuration that
@@ -116,9 +117,8 @@ int main(void)
 }
 
 
-
 /* ---------------------------------------------------------------------------- *
- * 								gpio_initi()									*
+ *                               gpio_init()                                    *
  * ---------------------------------------------------------------------------- *
  * initializes the GPIO driver for the led buttons and switches.
  * ---------------------------------------------------------------------------- */
@@ -140,9 +140,10 @@ unsigned char gpio_init()
 }
 
 /* ---------------------------------------------------------------------------- *
- * 								nco_init()									    *
+ *                               nco_init()                                     *
  * ---------------------------------------------------------------------------- *
- * initializes the Numerically Controlled Oscillator driver so that it's ready to use
+ * initializes the Numerically Controlled Oscillator driver so that it's ready
+ * to use.
  * ---------------------------------------------------------------------------- */
 void nco_init(void *InstancePtr)
 {
@@ -164,7 +165,7 @@ void nco_init(void *InstancePtr)
 }
 
 /* ---------------------------------------------------------------------------- *
- * 								read_superpose_play()									*
+ *                                read_superpose_play()                         *
  * ---------------------------------------------------------------------------- *
  * This function adds a sin waves to the sampled audio from the
  * audio codec by passing a step size to the input of an NCO component in the
@@ -199,10 +200,26 @@ void read_superpose_play()
 	nco_in = step;
 
 	// buttons
-	/* BTN_C --> nco */
-	/* BTN_U, BTN_D --> R31 & R32 */
 	btns = XGpio_DiscreteRead(&Gpio1, BUTTON_CHANNEL);
+
+	/* BTN_C --> nco */
 	cur_nco = ((btns & BTN_C) == 0) ? 0 : 1;
+
+	/* BTN_U, BTN_D --> R31 & R32 */
+	if ((btns & BTN_U) != 0) {
+		if ((volume & 0b11111100) != 0b11111100) {
+			volume += (1 << 2);
+			AudioWriteToReg(R31_PLAYBACK_LINE_OUTPUT_LEFT_VOLUME_CONTROL, volume);
+			AudioWriteToReg(R32_PLAYBACK_LINE_OUTPUT_RIGHT_VOLUME_CONTROL, volume);
+		}
+	}
+	if ((btns & BTN_D) != 0) {
+		if ((volume & 0b11111100) != 0) {
+			volume -= (1 << 2);
+			AudioWriteToReg(R31_PLAYBACK_LINE_OUTPUT_LEFT_VOLUME_CONTROL, volume);
+			AudioWriteToReg(R32_PLAYBACK_LINE_OUTPUT_RIGHT_VOLUME_CONTROL, volume);
+		}
+	}
 
 	xil_printf("Step = %d, nco_in = %d\r\n", step, nco_in);
 
@@ -252,9 +269,8 @@ void read_superpose_play()
 
 }
 
-
 /* ---------------------------------------------------------------------------- *
- * 									IicConfig()									*
+ *                               IicConfig()                                    *
  * ---------------------------------------------------------------------------- *
  * Initialises the IIC driver by looking up the configuration in the config
  * table and then initialising it. Also sets the IIC serial clock rate.
@@ -285,13 +301,13 @@ unsigned char IicConfig(unsigned int DeviceIdPS)
 }
 
 /* ---------------------------------------------------------------------------- *
- * 								AudioPllConfig()								*
+ *                              AudioPllConfig()                                *
  * ---------------------------------------------------------------------------- *
  * Configures audio codes's internal PLL. With MCLK = 10 MHz it configures the
  * PLL for a VCO frequency = 49.152 MHz, and an audio sample rate of 48 KHz.
  * ---------------------------------------------------------------------------- */
-void AudioPllConfig() {
-
+void AudioPllConfig()
+{
 	unsigned char u8TxData[8], u8RxData[6];
 	int Status;
 
@@ -348,15 +364,14 @@ void AudioPllConfig() {
 												// bit 0:		COREN = Core Clock enabled
 }
 
-
 /* ---------------------------------------------------------------------------- *
- * 								AudioWriteToReg									*
+ *                            AudioWriteToReg                                   *
  * ---------------------------------------------------------------------------- *
  * Function to write one byte (8-bits) to one of the registers from the audio
  * controller.
  * ---------------------------------------------------------------------------- */
-void AudioWriteToReg(unsigned char u8RegAddr, unsigned char u8Data) {
-
+void AudioWriteToReg(unsigned char u8RegAddr, unsigned char u8Data)
+{
 	unsigned char u8TxData[3];
 
 	u8TxData[0] = 0x40;
@@ -368,7 +383,7 @@ void AudioWriteToReg(unsigned char u8RegAddr, unsigned char u8Data) {
 }
 
 /* ---------------------------------------------------------------------------- *
- * 								AudioConfigureJacks()							*
+ *                             AudioConfigureJacks()                            *
  * ---------------------------------------------------------------------------- *
  * Configures audio codes's various mixers, ADC's, DAC's, and amplifiers to
  * accept stereo input from line in and push stereo output to line out.
@@ -391,6 +406,7 @@ void AudioConfigureJacks()
 	//AudioWriteToReg(R32_PLAYBACK_LINE_OUTPUT_RIGHT_VOLUME_CONTROL, 0xE6); // set ROUT volume (0db); unmute right channel of Line out port; set Line out port to line out mode
 	AudioWriteToReg(R31_PLAYBACK_LINE_OUTPUT_LEFT_VOLUME_CONTROL, 0xFE); //set LOUT volume (0db); unmute left channel of Line out port; set Line out port to line out mode
 	AudioWriteToReg(R32_PLAYBACK_LINE_OUTPUT_RIGHT_VOLUME_CONTROL, 0xFE); // set ROUT volume (0db); unmute right channel of Line out port; set Line out port to line out mode
+	volume = 0xFE; // R31, R32
 	AudioWriteToReg(R35_PLAYBACK_POWER_MANAGEMENT, 0x03); //enable left and right channel playback (not sure exactly what this does...)
 	AudioWriteToReg(R36_DAC_CONTROL_0, 0x03); //enable both DACs
 
@@ -402,12 +418,12 @@ void AudioConfigureJacks()
 }
 
 /* ---------------------------------------------------------------------------- *
- * 								LineinLineoutConfig()							*
+ * 	                           LineinLineoutConfig()                            *
  * ---------------------------------------------------------------------------- *
  * Configures Line-In input, ADC's, DAC's, Line-Out and HP-Out.
  * ---------------------------------------------------------------------------- */
-void LineinLineoutConfig() {
-
+void LineinLineoutConfig()
+{
 	AudioWriteToReg(R17_CONVERTER_CONTROL_0, 0x05);//48 KHz
 	AudioWriteToReg(R64_SERIAL_PORT_SAMPLING_RATE, 0x05);//48 KHz
 	AudioWriteToReg(R19_ADC_CONTROL, 0x13);
