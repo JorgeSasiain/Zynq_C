@@ -8,29 +8,32 @@ set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
 set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
-set_property webtalk.parent_dir C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.cache/wt [current_project]
-set_property parent.project_path C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.xpr [current_project]
+set_property webtalk.parent_dir C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.cache/wt [current_project]
+set_property parent.project_path C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.xpr [current_project]
 set_property XPM_LIBRARIES XPM_CDC [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part em.avnet.com:zed:part0:1.3 [current_project]
-set_property ip_repo_paths c:/Users/Docencia/Desktop/IP [current_project]
-set_property ip_output_repo c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.cache/ip [current_project]
+set_property ip_repo_paths c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/IP [current_project]
+set_property ip_output_repo c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
-read_verilog -library xil_defaultlib C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/hdl/system_wrapper.v
-add_files C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system.bd
-set_property used_in_implementation false [get_files -all c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_processing_system7_0_0/system_processing_system7_0_0.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_nco_0_0/constraints/nco_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_rst_ps7_0_100M_0/system_rst_ps7_0_100M_0_board.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_rst_ps7_0_100M_0/system_rst_ps7_0_100M_0.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_rst_ps7_0_100M_0/system_rst_ps7_0_100M_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_0_0/system_axi_gpio_0_0_board.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_0_0/system_axi_gpio_0_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_0_0/system_axi_gpio_0_0.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_xbar_0/system_xbar_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all c:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_auto_pc_0/system_auto_pc_0_ooc.xdc]
-set_property used_in_implementation false [get_files -all C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system_ooc.xdc]
-set_property is_locked true [get_files C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system.bd]
+read_verilog -library xil_defaultlib C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/hdl/system_wrapper.v
+add_files C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system.bd
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_processing_system7_0_0/system_processing_system7_0_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_nco_0_0/constraints/nco_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_rst_ps7_0_100M_0/system_rst_ps7_0_100M_0_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_rst_ps7_0_100M_0/system_rst_ps7_0_100M_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_rst_ps7_0_100M_0/system_rst_ps7_0_100M_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_0_0/system_axi_gpio_0_0_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_0_0/system_axi_gpio_0_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_0_0/system_axi_gpio_0_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_xbar_0/system_xbar_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_1_0/system_axi_gpio_1_0_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_1_0/system_axi_gpio_1_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_1_0/system_axi_gpio_1_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_auto_pc_0/system_auto_pc_0_ooc.xdc]
+set_property used_in_implementation false [get_files -all C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system_ooc.xdc]
+set_property is_locked true [get_files C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system.bd]
 
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -40,8 +43,8 @@ set_property is_locked true [get_files C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.s
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/constrs_1/new/adc_dac_audio.xdc
-set_property used_in_implementation false [get_files C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/constrs_1/new/adc_dac_audio.xdc]
+read_xdc C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/constrs_1/new/adc_dac_audio.xdc
+set_property used_in_implementation false [get_files C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/constrs_1/new/adc_dac_audio.xdc]
 
 read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]

@@ -51,19 +51,26 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GPIO_1_ID     XPAR_GPIO_1_DEVICE_ID
 #define NCO_ID        XPAR_NCO_0_DEVICE_ID
 
-//Define GPIO 0 Channels
+// Define GPIO 0 Channels
 #define LED_CHANNEL 1
 #define SWITCH_CHANNEL 2
 
-//Define GPIO 1 Channels
+// Define GPIO 1 Channels
 #define BUTTON_CHANNEL 1
+
+// Button constants
+// %000URLDC
+#define BTN_U 0b00010000
+#define BTN_R 0b00001000
+#define BTN_L 0b00000100
+#define BTN_D 0b00000010
+#define BTN_C 0b00000001
 
 //----------------------------------------------------
 // PROTOTYPE FUNCTIONS
 //----------------------------------------------------
 void read_superpose_play();
 void array_delay(u32* array, u32 in_left, u32 in_right);
-u32 is_button_pressed();
 unsigned char gpio_init();
 unsigned char IicConfig(unsigned int DeviceIdPS);
 void AudioPllConfig();
@@ -71,10 +78,10 @@ void AudioWriteToReg(unsigned char u8RegAddr, unsigned char u8Data);
 void AudioConfigureJacks();
 void LineinLineoutConfig();
 
-//Global variables
+// Global variables
 XIicPs Iic;
-XGpio Gpio0; // Gpio instance for led and switches
-XGpio Gpio1; // Gpio instance for buttons
+XGpio Gpio0; //Gpio instance for led and switches
+XGpio Gpio1; //Gpio instance for buttons
 XNco Nco;
 
 int main(void)
@@ -176,17 +183,10 @@ void array_delay(u32* array, u32 in_left, u32 in_right)
 	}
 }
 
-u32 is_button_pressed(void)
-// %000URLDC
+void read_superpose_play()
 {
-	return XGpio_DiscreteRead(&Gpio1, BUTTON_CHANNEL);
-}
-
-void read_superpose_play(void)
-{
-	u32 nco_in, nco_out, in_left, in_right, out_left, out_right, step, temp;
-	//u32 array[100000] = {0};
-	u32 btns;
+	u32 nco_in, nco_out, in_left, in_right, out_left, out_right, step, btns, cur_nco, cur_btns;
+	//@@ u32 array[100000] = {0};
 
 	// step is associated with the frequency of the sin wave
 	/* Read step size value from DIP switches */
@@ -198,6 +198,12 @@ void read_superpose_play(void)
 	/* Scale the step size */
 	nco_in = step;
 
+	// buttons
+	/* BTN_C --> nco */
+	/* BTN_U, BTN_D --> R31 & R32 */
+	btns = XGpio_DiscreteRead(&Gpio1, BUTTON_CHANNEL);
+	cur_nco = ((btns & BTN_C) == 0) ? 0 : 1;
+
 	xil_printf("Step = %d, nco_in = %d\r\n", step, nco_in);
 
 	while (!XUartPs_IsReceiveData(UART_BASEADDR)){
@@ -207,24 +213,18 @@ void read_superpose_play(void)
 
 		/* Receive sinusoidal sample from NCO core */
 		nco_out = XNco_GetSine_sample_v(&Nco);
+		if (cur_nco == 1)
+			cur_nco = nco_out;
 
 		/* Sample L+R audio from the codec */
 		in_left = Xil_In32(I2S_DATA_RX_L_REG);
 		in_right = Xil_In32(I2S_DATA_RX_R_REG);
 
-		//array_delay(array, in_left, in_right);
-
-		btns = is_button_pressed();
-		if (btns == 0) {
-			temp = 0;
-		} else {
-			temp = nco_out;
-		}
-
 		/* Add scaled sin wave component to the L+R audio samples */
-		//@@ out_left =  temp + array[100000] + in_left;
-		out_left =  temp + in_left;
-		out_right = temp + in_right;
+		//@@ array_delay(array, in_left, in_right);
+		//@@ out_left =  cur_nco + array[100000] + in_left;
+		out_left =  cur_nco + in_left;
+		out_right = cur_nco + in_right;
 
 		/* Output corrupted audio to the codec */
 		Xil_Out32(I2S_DATA_TX_L_REG, out_left);
@@ -233,7 +233,20 @@ void read_superpose_play(void)
 		/* If the DIP switch values have changed, break from while
 		 * loop to allow the step size value to update.
 		 */
-		if(step != XGpio_DiscreteRead(&Gpio0, SWITCH_CHANNEL)) break;
+		if (step != XGpio_DiscreteRead(&Gpio0, SWITCH_CHANNEL)) break;
+
+		/* Break if buttons pressed changed */
+		cur_btns = XGpio_DiscreteRead(&Gpio1, BUTTON_CHANNEL);
+		if (((btns & BTN_C) == 0) && ((cur_btns & BTN_C) != 0))
+			break;
+		if (((btns & BTN_D) == 0) && ((cur_btns & BTN_D) != 0))
+			break;
+		if (((btns & BTN_U) == 0) && ((cur_btns & BTN_U) != 0))
+			break;
+
+		/* Update released buttons */
+		btns = cur_btns;
+
 	}
 	read_superpose_play();
 

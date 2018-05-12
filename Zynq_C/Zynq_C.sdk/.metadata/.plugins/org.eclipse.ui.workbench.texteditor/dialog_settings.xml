@@ -2,15 +2,19 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="GPIO_ID" key="selection"/>
+		<item value="&amp;&amp;" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="GPIO_ID"/>
-			<item value="gpio_init"/>
-			<item value="Gpio"/>
+			<item value="&amp;&amp;"/>
+			<item value="XGpio_SetDataDirection"/>
+			<item value="LED_CHANNEL"/>
+			<item value="volume"/>
+			<item value="SetDat"/>
+			<item value="XGpio_DiscreteRead"/>
+			<item value="XGpio_WriteReg"/>
 			<item value="SWITCH_CHANNEL"/>
 		</list>
 		<list key="replacehistory">
@@ -20,7 +24,7 @@
 		<item value="336" key="DIALOG_WIDTH"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 		<item value="454" key="DIALOG_HEIGHT"/>
-		<item value="1301" key="DIALOG_X_ORIGIN"/>
-		<item value="255" key="DIALOG_Y_ORIGIN"/>
+		<item value="1362" key="DIALOG_X_ORIGIN"/>
+		<item value="585" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

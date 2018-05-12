@@ -1,4 +1,4 @@
-set_property SRC_FILE_INFO {cfile:C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/constrs_1/new/adc_dac_audio.xdc rfile:../../../Zynq_C.srcs/constrs_1/new/adc_dac_audio.xdc id:1} [current_design]
+set_property SRC_FILE_INFO {cfile:C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/constrs_1/new/adc_dac_audio.xdc rfile:../../../Zynq_C.srcs/constrs_1/new/adc_dac_audio.xdc id:1} [current_design]
 set_property src_info {type:XDC file:1 line:2 export:INPUT save:INPUT read:READ} [current_design]
 set_property PACKAGE_PIN AA6 [get_ports BCLK]
 set_property src_info {type:XDC file:1 line:5 export:INPUT save:INPUT read:READ} [current_design]

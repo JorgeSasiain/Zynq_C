@@ -2,11 +2,11 @@
 # Vivado v2017.1 (64-bit)
 # SW Build 1846317 on Fri Apr 14 18:55:03 MDT 2017
 # IP Build 1846188 on Fri Apr 14 20:52:08 MDT 2017
-# Start of session at: Mon May  7 19:06:41 2018
-# Process ID: 8288
-# Current directory: C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.runs/synth_1
+# Start of session at: Sat May 12 18:31:55 2018
+# Process ID: 7104
+# Current directory: C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.runs/synth_1
 # Command line: vivado.exe -log system_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source system_wrapper.tcl
-# Log file: C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.runs/synth_1/system_wrapper.vds
-# Journal file: C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.runs/synth_1\vivado.jou
+# Log file: C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.runs/synth_1/system_wrapper.vds
+# Journal file: C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.runs/synth_1\vivado.jou
 #-----------------------------------------------------------
 source system_wrapper.tcl -notrace

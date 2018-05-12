@@ -1,8 +1,8 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.1 (win64) Build 1846317 Fri Apr 14 18:55:03 MDT 2017
-//Date        : Mon May  7 19:01:37 2018
-//Host        : U106032 running 64-bit Service Pack 1  (build 7601)
+//Date        : Sat May 12 18:30:05 2018
+//Host        : LAPTOP-SGN0RD5H running 64-bit major release  (build 9200)
 //Command     : generate_target system_wrapper.bd
 //Design      : system_wrapper
 //Purpose     : IP block netlist
@@ -37,6 +37,7 @@ module system_wrapper
     LRCLK,
     SDATA_I,
     SDATA_O,
+    btns_5bits_tri_i,
     iic_1_scl_io,
     iic_1_sda_io,
     leds_8bits_tri_o,
@@ -68,6 +69,7 @@ module system_wrapper
   output LRCLK;
   input SDATA_I;
   output SDATA_O;
+  input [4:0]btns_5bits_tri_i;
   inout iic_1_scl_io;
   inout iic_1_sda_io;
   output [7:0]leds_8bits_tri_o;
@@ -100,6 +102,7 @@ module system_wrapper
   wire LRCLK;
   wire SDATA_I;
   wire SDATA_O;
+  wire [4:0]btns_5bits_tri_i;
   wire iic_1_scl_i;
   wire iic_1_scl_io;
   wire iic_1_scl_o;
@@ -155,6 +158,7 @@ module system_wrapper
         .LRCLK(LRCLK),
         .SDATA_I(SDATA_I),
         .SDATA_O(SDATA_O),
+        .btns_5bits_tri_i(btns_5bits_tri_i),
         .leds_8bits_tri_o(leds_8bits_tri_o),
         .sws_8bits_tri_i(sws_8bits_tri_i));
 endmodule

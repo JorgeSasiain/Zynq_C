@@ -51,19 +51,19 @@ set rc [catch {
   set_property board_part em.avnet.com:zed:part0:1.3 [current_project]
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.cache/wt [current_project]
-  set_property parent.project_path C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.xpr [current_project]
-  set_property ip_repo_paths C:/Users/Docencia/Desktop/IP [current_project]
-  set_property ip_output_repo C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.cache/ip [current_project]
+  set_property webtalk.parent_dir C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.cache/wt [current_project]
+  set_property parent.project_path C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.xpr [current_project]
+  set_property ip_repo_paths C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/IP [current_project]
+  set_property ip_output_repo C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES XPM_CDC [current_project]
-  add_files -quiet C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.runs/synth_1/system_wrapper.dcp
+  add_files -quiet C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.runs/synth_1/system_wrapper.dcp
   set_msg_config -source 4 -id {BD 41-1661} -suppress
   set_param project.isImplRun true
-  add_files C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system.bd
-  set_property is_locked true [get_files C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system.bd]
+  add_files C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system.bd
+  set_property is_locked true [get_files C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system.bd]
   set_param project.isImplRun false
-  read_xdc C:/Users/Docencia/Desktop/Zynq_C/Zynq_C.srcs/constrs_1/new/adc_dac_audio.xdc
+  read_xdc C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/constrs_1/new/adc_dac_audio.xdc
   set_param project.isImplRun true
   link_design -top system_wrapper -part xc7z020clg484-1
   set_param project.isImplRun false
