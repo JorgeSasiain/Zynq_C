@@ -186,7 +186,7 @@ void array_delay(u32* array, u32 in_left, u32 in_right)
 
 void read_superpose_play()
 {
-	u32 nco_in, nco_out, in_left, in_right, out_left, out_right, step, btns, cur_nco, cur_btns;
+	u32 nco_in, nco_out, in_left, in_right, out_left, out_right, step, btns, nco_en, cur_btns;
 	//@@ u32 array[100000] = {0};
 
 	// step is associated with the frequency of the sin wave
@@ -203,7 +203,7 @@ void read_superpose_play()
 	btns = XGpio_DiscreteRead(&Gpio1, BUTTON_CHANNEL);
 
 	/* BTN_C --> nco */
-	cur_nco = ((btns & BTN_C) == 0) ? 0 : 1;
+	nco_en = ((btns & BTN_C) == 0) ? 0 : 1;
 
 	/* BTN_U, BTN_D --> R31 & R32 */
 	if ((btns & BTN_U) != 0) {
@@ -229,9 +229,7 @@ void read_superpose_play()
 		XNco_SetStep_size_v(&Nco, nco_in);
 
 		/* Receive sinusoidal sample from NCO core */
-		nco_out = XNco_GetSine_sample_v(&Nco);
-		if (cur_nco == 1)
-			cur_nco = nco_out;
+		nco_out = (nco_en == 0) ? 0 : XNco_GetSine_sample_v(&Nco);
 
 		/* Sample L+R audio from the codec */
 		in_left = Xil_In32(I2S_DATA_RX_L_REG);
@@ -239,9 +237,9 @@ void read_superpose_play()
 
 		/* Add scaled sin wave component to the L+R audio samples */
 		//@@ array_delay(array, in_left, in_right);
-		//@@ out_left =  cur_nco + array[100000] + in_left;
-		out_left =  cur_nco + in_left;
-		out_right = cur_nco + in_right;
+		//@@ out_left =  nco_en + array[100000] + in_left;
+		out_left =  nco_en + in_left;
+		out_right = nco_en + in_right;
 
 		/* Output corrupted audio to the codec */
 		Xil_Out32(I2S_DATA_TX_L_REG, out_left);

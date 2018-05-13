@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="&amp;&amp;" key="selection"/>
+		<item value="volume" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="initial_volume"/>
+			<item value="AudioWriteToReg"/>
+			<item value="AudioWri"/>
 			<item value="&amp;&amp;"/>
 			<item value="XGpio_SetDataDirection"/>
 			<item value="LED_CHANNEL"/>
 			<item value="volume"/>
 			<item value="SetDat"/>
-			<item value="XGpio_DiscreteRead"/>
-			<item value="XGpio_WriteReg"/>
-			<item value="SWITCH_CHANNEL"/>
 		</list>
 		<list key="replacehistory">
+			<item value="volume"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
