@@ -186,7 +186,7 @@ void array_delay(u32* array, u32 in_left, u32 in_right)
 
 void read_superpose_play()
 {
-	u32 nco_in, nco_out, in_left, in_right, out_left, out_right, step, btns, nco_en, cur_btns;
+	u32 nco_in, nco_out, in_left, in_right, out_left, out_right, step, btns, temp;
 	//@@ u32 array[100000] = {0};
 
 	// step is associated with the frequency of the sin wave
@@ -194,52 +194,34 @@ void read_superpose_play()
 	step = XGpio_DiscreteRead(&Gpio0, SWITCH_CHANNEL);
 
 	/* Write step size value to the LEDs */
-	XGpio_DiscreteWrite(&Gpio0, LED_CHANNEL, step);
+	//XGpio_DiscreteWrite(&Gpio0, LED_CHANNEL, step);
 
 	/* Scale the step size */
 	nco_in = step;
 
 	// buttons
 	btns = XGpio_DiscreteRead(&Gpio1, BUTTON_CHANNEL);
-
-	/* BTN_C --> nco */
-	nco_en = ((btns & BTN_C) == 0) ? 0 : 1;
-
-	/* BTN_U, BTN_D --> R31 & R32 */
-	if ((btns & BTN_U) != 0) {
-		if ((volume & 0b11111100) != 0b11111100) {
-			volume += (1 << 2);
-			AudioWriteToReg(R31_PLAYBACK_LINE_OUTPUT_LEFT_VOLUME_CONTROL, volume);
-			AudioWriteToReg(R32_PLAYBACK_LINE_OUTPUT_RIGHT_VOLUME_CONTROL, volume);
-		}
-	}
-	if ((btns & BTN_D) != 0) {
-		if ((volume & 0b11111100) != 0) {
-			volume -= (1 << 2);
-			AudioWriteToReg(R31_PLAYBACK_LINE_OUTPUT_LEFT_VOLUME_CONTROL, volume);
-			AudioWriteToReg(R32_PLAYBACK_LINE_OUTPUT_RIGHT_VOLUME_CONTROL, volume);
-		}
-	}
+	XGpio_DiscreteWrite(&Gpio0, LED_CHANNEL, btns);
 
 	xil_printf("Step = %d, nco_in = %d\r\n", step, nco_in);
 
-	while (!XUartPs_IsReceiveData(UART_BASEADDR)){
+	while (!XUartPs_IsReceiveData(UART_BASEADDR)) {
 
 		/* Input scaled step size to the NCO core */
 		XNco_SetStep_size_v(&Nco, nco_in);
 
 		/* Receive sinusoidal sample from NCO core */
-		nco_out = (nco_en == 0) ? 0 : XNco_GetSine_sample_v(&Nco);
+		nco_out = XNco_GetSine_sample_v(&Nco);
+
+		temp = nco_out;
 
 		/* Sample L+R audio from the codec */
 		in_left = Xil_In32(I2S_DATA_RX_L_REG);
 		in_right = Xil_In32(I2S_DATA_RX_R_REG);
 
 		/* Add scaled sin wave component to the L+R audio samples */
-		//@@ array_delay(array, in_left, in_right);
-		//@@ out_left =  nco_en + array[100000] + in_left;
-		out_left =  nco_en + in_left;
-		out_right = nco_en + in_right;
+		out_left =  temp + in_left;
+		out_right = temp + in_right;
 
 		/* Output corrupted audio to the codec */
 		Xil_Out32(I2S_DATA_TX_L_REG, out_left);
@@ -249,19 +231,6 @@ void read_superpose_play()
 		 * loop to allow the step size value to update.
 		 */
 		if (step != XGpio_DiscreteRead(&Gpio0, SWITCH_CHANNEL)) break;
-
-		/* Break if buttons pressed changed */
-		cur_btns = XGpio_DiscreteRead(&Gpio1, BUTTON_CHANNEL);
-		if (((btns & BTN_C) == 0) && ((cur_btns & BTN_C) != 0))
-			break;
-		if (((btns & BTN_D) == 0) && ((cur_btns & BTN_D) != 0))
-			break;
-		if (((btns & BTN_U) == 0) && ((cur_btns & BTN_U) != 0))
-			break;
-
-		/* Update released buttons */
-		btns = cur_btns;
-
 	}
 	read_superpose_play();
 

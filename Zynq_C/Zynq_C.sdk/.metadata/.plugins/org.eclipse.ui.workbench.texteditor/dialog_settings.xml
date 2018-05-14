@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="volume" key="selection"/>
+		<item value="nco_en" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="cur_nco"/>
 			<item value="initial_volume"/>
 			<item value="AudioWriteToReg"/>
 			<item value="AudioWri"/>
@@ -15,9 +16,9 @@
 			<item value="XGpio_SetDataDirection"/>
 			<item value="LED_CHANNEL"/>
 			<item value="volume"/>
-			<item value="SetDat"/>
 		</list>
 		<list key="replacehistory">
+			<item value="nco_en"/>
 			<item value="volume"/>
 		</list>
 	</section>
