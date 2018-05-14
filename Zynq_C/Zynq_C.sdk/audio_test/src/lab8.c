@@ -186,7 +186,7 @@ void array_delay(u32* array, u32 in_left, u32 in_right)
 
 void read_superpose_play()
 {
-	u32 nco_in, nco_out, in_left, in_right, out_left, out_right, step, btns, nco_en, cur_btns;
+	u32 nco_in, in_left, in_right, out_left, out_right, step, btns, nco_en, cur_btns, nco_out;
 	//@@ u32 array[100000] = {0};
 
 	// step is associated with the frequency of the sin wave
@@ -238,8 +238,8 @@ void read_superpose_play()
 		/* Add scaled sin wave component to the L+R audio samples */
 		//@@ array_delay(array, in_left, in_right);
 		//@@ out_left =  nco_en + array[100000] + in_left;
-		out_left =  nco_en + in_left;
-		out_right = nco_en + in_right;
+		out_left =  nco_out + in_left;
+		out_right = nco_out + in_right;
 
 		/* Output corrupted audio to the codec */
 		Xil_Out32(I2S_DATA_TX_L_REG, out_left);
