@@ -1,7 +1,7 @@
 //Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2017.1 (win64) Build 1846317 Fri Apr 14 18:55:03 MDT 2017
-//Date        : Sat May 12 18:30:05 2018
+//Date        : Mon May 14 17:38:52 2018
 //Host        : LAPTOP-SGN0RD5H running 64-bit major release  (build 9200)
 //Command     : generate_target system_wrapper.bd
 //Design      : system_wrapper
@@ -12,6 +12,7 @@
 module system_wrapper
    (ADDRESS,
     BCLK,
+    DC,
     DDR_addr,
     DDR_ba,
     DDR_cas_n,
@@ -35,8 +36,13 @@ module system_wrapper
     FIXED_IO_ps_porb,
     FIXED_IO_ps_srstb,
     LRCLK,
+    RES,
+    SCLK,
     SDATA_I,
     SDATA_O,
+    SDIN,
+    VBAT,
+    VDD,
     btns_5bits_tri_i,
     iic_1_scl_io,
     iic_1_sda_io,
@@ -44,6 +50,7 @@ module system_wrapper
     sws_8bits_tri_i);
   output [1:0]ADDRESS;
   output BCLK;
+  output DC;
   inout [14:0]DDR_addr;
   inout [2:0]DDR_ba;
   inout DDR_cas_n;
@@ -67,8 +74,13 @@ module system_wrapper
   inout FIXED_IO_ps_porb;
   inout FIXED_IO_ps_srstb;
   output LRCLK;
+  output RES;
+  output SCLK;
   input SDATA_I;
   output SDATA_O;
+  output SDIN;
+  output VBAT;
+  output VDD;
   input [4:0]btns_5bits_tri_i;
   inout iic_1_scl_io;
   inout iic_1_sda_io;
@@ -77,6 +89,7 @@ module system_wrapper
 
   wire [1:0]ADDRESS;
   wire BCLK;
+  wire DC;
   wire [14:0]DDR_addr;
   wire [2:0]DDR_ba;
   wire DDR_cas_n;
@@ -100,8 +113,13 @@ module system_wrapper
   wire FIXED_IO_ps_porb;
   wire FIXED_IO_ps_srstb;
   wire LRCLK;
+  wire RES;
+  wire SCLK;
   wire SDATA_I;
   wire SDATA_O;
+  wire SDIN;
+  wire VBAT;
+  wire VDD;
   wire [4:0]btns_5bits_tri_i;
   wire iic_1_scl_i;
   wire iic_1_scl_io;
@@ -127,6 +145,7 @@ module system_wrapper
   system system_i
        (.ADDRESS(ADDRESS),
         .BCLK(BCLK),
+        .DC(DC),
         .DDR_addr(DDR_addr),
         .DDR_ba(DDR_ba),
         .DDR_cas_n(DDR_cas_n),
@@ -156,8 +175,13 @@ module system_wrapper
         .IIC_1_sda_o(iic_1_sda_o),
         .IIC_1_sda_t(iic_1_sda_t),
         .LRCLK(LRCLK),
+        .RES(RES),
+        .SCLK(SCLK),
         .SDATA_I(SDATA_I),
         .SDATA_O(SDATA_O),
+        .SDIN(SDIN),
+        .VBAT(VBAT),
+        .VDD(VDD),
         .btns_5bits_tri_i(btns_5bits_tri_i),
         .leds_8bits_tri_o(leds_8bits_tri_o),
         .sws_8bits_tri_i(sws_8bits_tri_i));

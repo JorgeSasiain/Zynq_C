@@ -14,9 +14,13 @@ set_property XPM_LIBRARIES XPM_CDC [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property board_part em.avnet.com:zed:part0:1.3 [current_project]
-set_property ip_repo_paths c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/IP [current_project]
+set_property ip_repo_paths {
+  c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/IP
+  c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/lab3_ips
+} [current_project]
 set_property ip_output_repo c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
+add_files c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_ZedboardOLED_0_0/src/charLib/charLib.coe
 read_verilog -library xil_defaultlib C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/hdl/system_wrapper.v
 add_files C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system.bd
 set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_processing_system7_0_0/system_processing_system7_0_0.xdc]
@@ -31,6 +35,7 @@ set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop
 set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_1_0/system_axi_gpio_1_0_board.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_1_0/system_axi_gpio_1_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_axi_gpio_1_0/system_axi_gpio_1_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_ZedboardOLED_0_0/src/charLib/charLib_ooc.xdc]
 set_property used_in_implementation false [get_files -all c:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/ip/system_auto_pc_0/system_auto_pc_0_ooc.xdc]
 set_property used_in_implementation false [get_files -all C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system_ooc.xdc]
 set_property is_locked true [get_files C:/Users/Jorge/Desktop/Uni/MASTER/Digital/lab/_Zynq_C/Zynq_C/Zynq_C.srcs/sources_1/bd/system/system.bd]

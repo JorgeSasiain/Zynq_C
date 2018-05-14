@@ -2,12 +2,13 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="DELAY" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="oled"/>
 			<item value="DELAY"/>
 			<item value="oled_test"/>
 			<item value="oled_text"/>
@@ -15,7 +16,6 @@
 			<item value="GPIO_1"/>
 			<item value="cur_nco"/>
 			<item value="initial_volume"/>
-			<item value="AudioWriteToReg"/>
 		</list>
 		<list key="replacehistory">
 			<item value="nco_en"/>
